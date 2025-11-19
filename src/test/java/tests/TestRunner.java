@@ -6,14 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.WebDriver;
 import sauce.com.utils.TestValueProvider;
 
 @Slf4j
 public class TestRunner {
-
-    protected static boolean isTestSuccessful = false;
 
     protected WebDriver driver;
     protected static TestValueProvider testValueProvider = new TestValueProvider();
@@ -27,12 +24,7 @@ public class TestRunner {
     }
 
     @AfterEach
-    public void afterEach(TestInfo testInfo) {
-        if (!isTestSuccessful) {
-            log.error("Test_name: {}  fail", testInfo.getDisplayName());
-            log.error("Test_method: {}  fail", testInfo.getTestMethod());
-        }
-
+    public void afterEach() {
         DriverSingleton.closeDriver();
         log.info("Close driver");
     }
